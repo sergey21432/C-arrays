@@ -9,7 +9,7 @@ int[] SizeRequeryArray(int dimensionArray)
         arraySize[i] = -1;
         while (arraySize[i] < 1)
         {
-            Console.WriteLine($"Enter the size for {i+1} dimension as positive integer:");
+            Console.WriteLine($"Enter the size for {i + 1} dimension as positive integer:");
             arraySize[i] = int.Parse(Console.ReadLine());
         }
     }
@@ -68,11 +68,42 @@ void PrintArrayTwoSize(double[,] array)
     }
 }
 
+void RowSortDescending(double[,] array)
+{
+    int posMax;
+    double temporary;
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1) - 1; j++)
+        {
+            posMax = j;
+            for (int k = j + 1; k < array.GetLength(1); k++)
+            {
+                if (array[i, posMax] < array[i, k]) posMax = k;
+            }
+            if (posMax != j)
+            {
+                temporary = array[i, j];
+                array[i, j] = array[i, posMax];
+                array[i, posMax] = temporary;
+            }
+        }
+    }
+}
+
 int[] sizeArray = SizeRequeryArray(2);
 
 double[,] twoDimensionArray = CreateArrayDblTwoDimension(sizeArray[0], sizeArray[1]);
 
+Console.WriteLine("Original array:");
 PrintArrayTwoSize(twoDimensionArray);
+Console.WriteLine();
+RowSortDescending(twoDimensionArray);
+Console.WriteLine("Sorted descending array:");
+PrintArrayTwoSize(twoDimensionArray);
+Console.WriteLine();
+
+
 
 
 
