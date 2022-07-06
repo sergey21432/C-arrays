@@ -110,7 +110,7 @@ int SearchRowMinSum(double[,] array)
 {
     double minSumRow = 0;
     double sumCurrentRow;
-    int numberRow = 0;
+    int numberRow = 1;
     for (int i = 0; i < array.GetLength(0); i++)
     {
         sumCurrentRow = 0;
@@ -128,7 +128,7 @@ int SearchRowMinSum(double[,] array)
     return numberRow;
 }
 
-Console.WriteLine($"The {SearchRowMinSum(twoDimensionArray)} row has smaller summary of elements.");
+Console.WriteLine($"The row {SearchRowMinSum(twoDimensionArray)} has smallest sum of elements.");
 
 
 
