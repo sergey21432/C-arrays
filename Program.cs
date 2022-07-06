@@ -9,7 +9,7 @@ int[] SizeRequeryArray(int dimensionArray)
         arraySize[i] = -1;
         while (arraySize[i] < 1)
         {
-            Console.WriteLine($"Enter the size for {i + 1} dimension as positive integer:");
+            Console.WriteLine($"Enter the size for {i + 1} dimension of array as positive integer:");
             arraySize[i] = int.Parse(Console.ReadLine());
         }
     }
@@ -37,7 +37,7 @@ double[,] CreateArrayDblTwoDimension(int rows, int columns)
     return array;
 }
 
-void PrintArrayTwoSize(double[,] array)
+void PrintArrayTwoDimension(double[,] array)
 {
     int maxSymbols = 0;
     int currentSymbols = 0;
@@ -91,16 +91,16 @@ void RowSortDescending(double[,] array)
     }
 }
 
+Console.WriteLine("Task 54");
 int[] sizeArray = SizeRequeryArray(2);
-
 double[,] twoDimensionArray = CreateArrayDblTwoDimension(sizeArray[0], sizeArray[1]);
-
+Console.WriteLine();
 Console.WriteLine("Original array:");
-PrintArrayTwoSize(twoDimensionArray);
+PrintArrayTwoDimension(twoDimensionArray);
 Console.WriteLine();
 RowSortDescending(twoDimensionArray);
 Console.WriteLine("Sorted descending array:");
-PrintArrayTwoSize(twoDimensionArray);
+PrintArrayTwoDimension(twoDimensionArray);
 Console.WriteLine();
 
 /* Задача 56: Задайте прямоугольный двумерный массив. Напишите
@@ -119,7 +119,7 @@ int SearchRowMinSum(double[,] array)
             sumCurrentRow += array[i, j];
         }
         if (i == 0) minSumRow = sumCurrentRow;
-        else if (sumCurrentRow < minSumRow) 
+        else if (sumCurrentRow < minSumRow)
         {
             minSumRow = sumCurrentRow;
             numberRow = i + 1;
@@ -128,7 +128,55 @@ int SearchRowMinSum(double[,] array)
     return numberRow;
 }
 
+Console.WriteLine("Task 56");
 Console.WriteLine($"The row {SearchRowMinSum(twoDimensionArray)} has smallest sum of elements.");
+Console.WriteLine();
+
+/* Задача 58: Задайте две матрицы. Напишите программу, которая будет
+находить произведение двух матриц. */
+
+double[,] matrixProduct(double[,] array1, double[,] array2)
+{
+    double sum;
+    int rows = array1.GetLength(0);
+    int columns = array2.GetLength(1);
+    double[,] matrixProduct = new double[rows, columns];
+    for (int i = 0; i < array1.GetLength(0); i++)
+    {
+        for (int j = 0; j < array2.GetLength(1); j++)
+        {
+            sum = 0;
+            for (int k = 0; k < array1.GetLength(1); k++)
+            {
+                sum += array1[i, k] * array2[k, j];
+            }
+            matrixProduct[i, j] = Math.Round(sum, 1);
+        }
+    }
+    return matrixProduct;
+}
+
+Console.WriteLine("Task 58");
+double[,] matrix1 = twoDimensionArray;
+sizeArray = SizeRequeryArray(2);
+Console.WriteLine();
+double[,] matrix2 = CreateArrayDblTwoDimension(sizeArray[0], sizeArray[1]);
+Console.WriteLine($"The second matrix:");
+PrintArrayTwoDimension(matrix2);
+Console.WriteLine();
+
+if (matrix1.GetLength(1) != matrix2.GetLength(0)) Console.WriteLine($"Multiplication is impossible.");
+else
+{
+    Console.WriteLine("The matrix product:");
+    PrintArrayTwoDimension(
+        matrixProduct(matrix1, matrix2));
+}
+
+
+
+
+
 
 
 
