@@ -103,8 +103,32 @@ Console.WriteLine("Sorted descending array:");
 PrintArrayTwoSize(twoDimensionArray);
 Console.WriteLine();
 
+/* Задача 56: Задайте прямоугольный двумерный массив. Напишите
+программу, которая будет находить строку с наименьшей суммой элементов. */
 
+int SearchRowMinSum(double[,] array)
+{
+    double minSumRow = 0;
+    double sumCurrentRow;
+    int numberRow = 0;
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        sumCurrentRow = 0;
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            sumCurrentRow += array[i, j];
+        }
+        if (i == 0) minSumRow = sumCurrentRow;
+        else if (sumCurrentRow < minSumRow) 
+        {
+            minSumRow = sumCurrentRow;
+            numberRow = i + 1;
+        }
+    }
+    return numberRow;
+}
 
+Console.WriteLine($"The {SearchRowMinSum(twoDimensionArray)} row has smaller summary of elements.");
 
 
 
