@@ -1,23 +1,15 @@
 ﻿/* Задача 54: Задайте двумерный массив. Напишите программу, которая
 упорядочит по убыванию элементы каждой строки двумерного массива. */
 
-int[] SizeRequeryArray()
+int[] SizeRequeryArray(int dimensionArray)
 {
-    int dimensionArray = 0;
-    while (dimensionArray < 1)
-    {
-        Console.WriteLine("Please, enter the dimension of array as an integer positive number:");
-        dimensionArray = int.Parse(Console.ReadLine());
-    }
-
-    string dimensionString = String.Empty;
     int[] arraySize = new int[dimensionArray];
-    for (int i = 1; i < dimensionArray; i++)
+    for (int i = 0; i < dimensionArray; i++)
     {
         arraySize[i] = -1;
         while (arraySize[i] < 1)
         {
-            Console.WriteLine($"Enter the size for {i} dimension as positive integer:");
+            Console.WriteLine($"Enter the size for {i+1} dimension as positive integer:");
             arraySize[i] = int.Parse(Console.ReadLine());
         }
     }
@@ -36,14 +28,51 @@ double[,] CreateArrayDblTwoDimension(int rows, int columns)
         for (int j = 0; j < array.GetLength(1); j++)
         {
             integerPart = random.Next(-1000, 1001);
-            doubleSwitch = random.Next(0, 2);
-            if (doubleSwitch == 1) doublePart = Math.Round(random.NextDouble(), 3);
+            doubleSwitch = random.Next(0, 3);
+            if (doubleSwitch > 0) doublePart = Math.Round(random.NextDouble(), 1);
             else doublePart = 0;
             array[i, j] = integerPart + doublePart;
         }
     }
     return array;
 }
+
+void PrintArrayTwoSize(double[,] array)
+{
+    int maxSymbols = 0;
+    int currentSymbols = 0;
+    string spaceEmpty;
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            currentSymbols = array[i, j].ToString().Length;
+            if (maxSymbols < currentSymbols) maxSymbols = currentSymbols;
+        }
+    }
+
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+
+            currentSymbols = array[i, j].ToString().Length;
+            spaceEmpty = "    ";
+            for (int k = currentSymbols; k < maxSymbols; k++)
+            {
+                spaceEmpty += " ";
+            }
+            Console.Write(array[i, j] + spaceEmpty);
+        }
+        Console.WriteLine();
+    }
+}
+
+int[] sizeArray = SizeRequeryArray(2);
+
+double[,] twoDimensionArray = CreateArrayDblTwoDimension(sizeArray[0], sizeArray[1]);
+
+PrintArrayTwoSize(twoDimensionArray);
 
 
 
