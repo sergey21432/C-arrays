@@ -172,10 +172,80 @@ else
     PrintArrayTwoDimension(
         matrixProduct(matrix1, matrix2));
 }
+Console.WriteLine();
 
+/* Задача 60: Сформируйте трёхмерный массив из неповторяющихся
+двузначных чисел. Напишите программу, которая будет построчно выводить
+массив, добавляя индексы каждого элемента. */
 
+int[,,] CreateArrayDblThreeDimension(int x, int y, int z)
+{
+    int[,,] array = new int[x, y, z];
+    int[] dictionary = new int[x * y * z];
 
+    bool repeat;
+    int twoDigit;
+    int count = 0;
+    var random = new Random();
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            for (int k = 0; k < array.GetLength(2); k++)
+            {
+                do
+                {
+                    repeat = false;
+                    twoDigit = random.Next(10, 100);
+                    for (int l = 0; l < count; l++)
+                    {
+                        if (twoDigit == dictionary[l])
+                        {
+                            repeat = true;
+                            break;
+                        }
+                    }
 
+                } while (repeat);
+
+                array[i, j, k] = twoDigit;
+                dictionary[count] = twoDigit;
+                count++;
+            }
+        }
+    }
+    return array;
+}
+
+void PrintArrayThreeDimension(int[,,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            for (int k = 0; k < array.GetLength(2); k++)
+            {
+                Console.WriteLine($"Element [{i},{j},{k}]: {array[i, j, k]}.");
+            }
+            Console.WriteLine();
+        }
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine();
+    }
+}
+
+Console.WriteLine("Task 60");
+sizeArray = SizeRequeryArray(3);
+int numberElements = sizeArray[0] * sizeArray[1] * sizeArray[2];
+int numbersTwoDigit = 99 - 9;
+if (numberElements > numbersTwoDigit) Console.WriteLine("Number elements of array is more than number two digit numbers.");
+else
+{
+    PrintArrayThreeDimension(
+        CreateArrayDblThreeDimension(sizeArray[0], sizeArray[1], sizeArray[2]));
+}
+Console.WriteLine();
 
 
 
