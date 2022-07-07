@@ -1,6 +1,8 @@
 ﻿/* Задача 54: Задайте двумерный массив. Напишите программу, которая
 упорядочит по убыванию элементы каждой строки двумерного массива. */
 
+Console.WriteLine("Task 54");
+
 int[] SizeRequeryArray(int dimensionArray)
 {
     int[] arraySize = new int[dimensionArray];
@@ -91,10 +93,9 @@ void RowSortDescending(double[,] array)
     }
 }
 
-Console.WriteLine("Task 54");
 int[] sizeArray = SizeRequeryArray(2);
-double[,] twoDimensionArray = CreateArrayDblTwoDimension(sizeArray[0], sizeArray[1]);
 Console.WriteLine();
+double[,] twoDimensionArray = CreateArrayDblTwoDimension(sizeArray[0], sizeArray[1]);
 Console.WriteLine("Original array:");
 PrintArrayTwoDimension(twoDimensionArray);
 Console.WriteLine();
@@ -105,6 +106,8 @@ Console.WriteLine();
 
 /* Задача 56: Задайте прямоугольный двумерный массив. Напишите
 программу, которая будет находить строку с наименьшей суммой элементов. */
+
+Console.WriteLine("Task 56");
 
 int SearchRowMinSum(double[,] array)
 {
@@ -128,12 +131,13 @@ int SearchRowMinSum(double[,] array)
     return numberRow;
 }
 
-Console.WriteLine("Task 56");
 Console.WriteLine($"The row {SearchRowMinSum(twoDimensionArray)} has smallest sum of elements.");
 Console.WriteLine();
 
 /* Задача 58: Задайте две матрицы. Напишите программу, которая будет
 находить произведение двух матриц. */
+
+Console.WriteLine("Task 58");
 
 double[,] matrixProduct(double[,] array1, double[,] array2)
 {
@@ -156,8 +160,10 @@ double[,] matrixProduct(double[,] array1, double[,] array2)
     return matrixProduct;
 }
 
-Console.WriteLine("Task 58");
 double[,] matrix1 = twoDimensionArray;
+Console.WriteLine($"The first matrix:");
+PrintArrayTwoDimension(matrix1);
+Console.WriteLine();
 sizeArray = SizeRequeryArray(2);
 Console.WriteLine();
 double[,] matrix2 = CreateArrayDblTwoDimension(sizeArray[0], sizeArray[1]);
@@ -177,6 +183,8 @@ Console.WriteLine();
 /* Задача 60: Сформируйте трёхмерный массив из неповторяющихся
 двузначных чисел. Напишите программу, которая будет построчно выводить
 массив, добавляя индексы каждого элемента. */
+
+Console.WriteLine("Task 60");
 
 int[,,] CreateArrayDblThreeDimension(int x, int y, int z)
 {
@@ -219,13 +227,13 @@ int[,,] CreateArrayDblThreeDimension(int x, int y, int z)
 
 void PrintArrayThreeDimension(int[,,] array)
 {
-    for (int i = 0; i < array.GetLength(0); i++)
+    for (int i = 0; i < array.GetLength(2); i++)
     {
         for (int j = 0; j < array.GetLength(1); j++)
         {
-            for (int k = 0; k < array.GetLength(2); k++)
+            for (int k = 0; k < array.GetLength(0); k++)
             {
-                Console.WriteLine($"Element [{i},{j},{k}]: {array[i, j, k]}.");
+                Console.WriteLine($"Element [{k+1},{j+1},{i+1}]: {array[k, j, i]}.");
             }
             Console.WriteLine();
         }
@@ -235,8 +243,8 @@ void PrintArrayThreeDimension(int[,,] array)
     }
 }
 
-Console.WriteLine("Task 60");
 sizeArray = SizeRequeryArray(3);
+Console.WriteLine();
 int numberElements = sizeArray[0] * sizeArray[1] * sizeArray[2];
 int numbersTwoDigit = 99 - 9;
 if (numberElements > numbersTwoDigit) Console.WriteLine("Number elements of array is more than number two digit numbers.");
@@ -249,6 +257,8 @@ Console.WriteLine();
 
 /* Задача 62: Заполните спирально массив 4 на 4. */
 
+Console.WriteLine("Task 62");
+
 void FillArraySpiral(int[,] array)
 {
     int integer = 1;
@@ -256,9 +266,8 @@ void FillArraySpiral(int[,] array)
     int j = 0;
 
     array[i, j] = integer;
-    int circles = (Math.Min(array.GetLength(0), array.GetLength(1)) + 1) / 2;
     int direction = 1;
-    for (int k = 0; k < circles; k++)
+    while (array[i, j + 1] == 0)
     {
         for (int l = 0; l < 2; l++)
         {
@@ -314,9 +323,11 @@ void PrintArrayIntTwoDimension(int[,] array)
 }
 
 sizeArray = SizeRequeryArray(2);
+Console.WriteLine();
 int[,] arraySpiral = new int[sizeArray[0], sizeArray[1]];
 FillArraySpiral(arraySpiral);
 PrintArrayIntTwoDimension(arraySpiral);
+Console.WriteLine();
 
 
 
