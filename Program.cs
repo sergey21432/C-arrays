@@ -247,7 +247,7 @@ sizeArray = SizeRequeryArray(3);
 Console.WriteLine();
 int numberElements = sizeArray[0] * sizeArray[1] * sizeArray[2];
 int numbersTwoDigit = 99 - 9;
-if (numberElements > numbersTwoDigit) Console.WriteLine("Number elements of array is more than number two digit numbers.");
+if (numberElements > numbersTwoDigit) Console.WriteLine("The number of array elements is greater than the number of two-digit numbers.");
 else
 {
     PrintArrayThreeDimension(
