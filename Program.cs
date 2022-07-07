@@ -1,7 +1,7 @@
 ﻿/* Задача 54: Задайте двумерный массив. Напишите программу, которая
 упорядочит по убыванию элементы каждой строки двумерного массива. */
 
-Console.WriteLine("Task 54");
+Console.WriteLine("Task 54.");
 
 int[] SizeRequeryArray(int dimensionArray)
 {
@@ -107,7 +107,7 @@ Console.WriteLine();
 /* Задача 56: Задайте прямоугольный двумерный массив. Напишите
 программу, которая будет находить строку с наименьшей суммой элементов. */
 
-Console.WriteLine("Task 56");
+Console.WriteLine("Task 56.");
 
 int SearchRowMinSum(double[,] array)
 {
@@ -137,7 +137,7 @@ Console.WriteLine();
 /* Задача 58: Задайте две матрицы. Напишите программу, которая будет
 находить произведение двух матриц. */
 
-Console.WriteLine("Task 58");
+Console.WriteLine("Task 58.");
 
 double[,] matrixProduct(double[,] array1, double[,] array2)
 {
@@ -184,7 +184,7 @@ Console.WriteLine();
 двузначных чисел. Напишите программу, которая будет построчно выводить
 массив, добавляя индексы каждого элемента. */
 
-Console.WriteLine("Task 60");
+Console.WriteLine("Task 60.");
 
 int[,,] CreateArrayDblThreeDimension(int x, int y, int z)
 {
@@ -233,7 +233,7 @@ void PrintArrayThreeDimension(int[,,] array)
         {
             for (int k = 0; k < array.GetLength(0); k++)
             {
-                Console.WriteLine($"Element [{k+1},{j+1},{i+1}]: {array[k, j, i]}.");
+                Console.WriteLine($"Element [{k + 1},{j + 1},{i + 1}]: {array[k, j, i]}.");
             }
             Console.WriteLine();
         }
@@ -257,14 +257,13 @@ Console.WriteLine();
 
 /* Задача 62: Заполните спирально массив 4 на 4. */
 
-Console.WriteLine("Task 62");
+Console.WriteLine("Task 62.");
 
 void FillArraySpiral(int[,] array)
 {
     int integer = 1;
     int i = 0;
     int j = 0;
-
     array[i, j] = integer;
     int direction = 1;
     while (array[i, j + 1] == 0)
@@ -328,6 +327,49 @@ int[,] arraySpiral = new int[sizeArray[0], sizeArray[1]];
 FillArraySpiral(arraySpiral);
 PrintArrayIntTwoDimension(arraySpiral);
 Console.WriteLine();
+
+/* Задача 61: Вывести первые N строк треугольника Паскаля. Сделать вывод
+в виде равнобедренного треугольника */
+
+Console.WriteLine("Task 61.");
+
+void FillTrianglePascal(int[,] array)
+{
+    int j = 0;
+    int numberRows = array.GetLength(0);
+
+    for (int i = 0; i < numberRows; i++)
+    {
+        array[i, j] = 1;
+        array[j, i] = 1;
+    }
+    int numberColumns = numberRows;
+    for (int i = 1; i < numberRows-1; i++)
+    {
+        for (j = 1; j < numberColumns - 1; j++)
+        {
+            array[i, j] = array[i - 1, j] + array[i, j - 1];
+        }
+        numberColumns -= 1;
+    }
+
+}
+
+
+Console.WriteLine("Please, enter the length of the isosceles triangle side:");
+int N = int.Parse(Console.ReadLine());
+int[,] arrayTrianglePascal = new int[N, N];
+FillTrianglePascal(arrayTrianglePascal);
+PrintArrayIntTwoDimension(arrayTrianglePascal);
+
+
+
+
+
+
+
+
+
 
 
 
