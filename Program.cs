@@ -344,13 +344,28 @@ void FillTrianglePascal(int[,] array)
         array[j, i] = 1;
     }
     int numberColumns = numberRows;
-    for (int i = 1; i < numberRows-1; i++)
+    for (int i = 1; i < numberRows - 1; i++)
     {
         for (j = 1; j < numberColumns - 1; j++)
         {
             array[i, j] = array[i - 1, j] + array[i, j - 1];
         }
         numberColumns -= 1;
+    }
+}
+
+void PrintIsoscelesTriangle(int[,] array)
+{
+    int i = 0;
+    for (int j = 0; j < array.GetLength(1); j++)
+    {
+        while (j > -1)
+        {
+            Console.Write(array[i,j]);
+            i++;
+            j--;
+        }
+        Console.WriteLine();
     }
 
 }
@@ -360,7 +375,7 @@ Console.WriteLine("Please, enter the length of the isosceles triangle side:");
 int N = int.Parse(Console.ReadLine());
 int[,] arrayTrianglePascal = new int[N, N];
 FillTrianglePascal(arrayTrianglePascal);
-PrintArrayIntTwoDimension(arrayTrianglePascal);
+PrintIsoscelesTriangle(arrayTrianglePascal);
 
 
 
