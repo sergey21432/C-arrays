@@ -247,6 +247,80 @@ else
 }
 Console.WriteLine();
 
+/* Задача 62: Заполните спирально массив 4 на 4. */
+
+void FillArraySpiral(int[,] array)
+{
+    int integer = 1;
+    int i = 0;
+    int j = 0;
+
+    array[i, j] = integer;
+    int circles = (Math.Min(array.GetLength(0), array.GetLength(1)) + 1) / 2;
+    int direction = 1;
+    for (int k = 0; k < circles; k++)
+    {
+        for (int l = 0; l < 2; l++)
+        {
+            while (j + direction < array.GetLength(1)
+                && j + direction >= 0
+                && array[i, j + direction] == 0)
+            {
+                j += direction;
+                integer++;
+                array[i, j] = integer;
+
+            }
+            while (i + direction < array.GetLength(0) && array[i + direction, j] == 0)
+            {
+                i += direction;
+                integer++;
+                array[i, j] = integer;
+            }
+            direction *= -1;
+        }
+    }
+}
+
+void PrintArrayIntTwoDimension(int[,] array)
+{
+    int maxSymbols = 0;
+    int currentSymbols = 0;
+    string spaceEmpty;
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            currentSymbols = array[i, j].ToString().Length;
+            if (maxSymbols < currentSymbols) maxSymbols = currentSymbols;
+        }
+    }
+
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+
+            currentSymbols = array[i, j].ToString().Length;
+            spaceEmpty = "    ";
+            for (int k = currentSymbols; k < maxSymbols; k++)
+            {
+                spaceEmpty += " ";
+            }
+            Console.Write(array[i, j] + spaceEmpty);
+        }
+        Console.WriteLine();
+    }
+}
+
+sizeArray = SizeRequeryArray(2);
+int[,] arraySpiral = new int[sizeArray[0], sizeArray[1]];
+FillArraySpiral(arraySpiral);
+PrintArrayIntTwoDimension(arraySpiral);
+
+
+
+
 
 
 
