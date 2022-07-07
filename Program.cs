@@ -335,61 +335,67 @@ Console.WriteLine("Task 61.");
 
 void FillTrianglePascal(int[,] array)
 {
-    int j = 0;
-    int numberRows = array.GetLength(0);
-
-    for (int i = 0; i < numberRows; i++)
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-        array[i, j] = 1;
-        array[j, i] = 1;
+        array[i, 0] = 1;
     }
-    int numberColumns = numberRows;
-    for (int i = 1; i < numberRows - 1; i++)
+
+    for (int i = 1; i < array.GetLength(0); i++)
     {
-        for (j = 1; j < numberColumns - 1; j++)
+        for (int j = 1; j <= i; j++)
         {
-            array[i, j] = array[i - 1, j] + array[i, j - 1];
+            array[i, j] = array[i - 1, j - 1] + array[i - 1, j];
         }
-        numberColumns -= 1;
+    }
+    int count;
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        count = 0;
+        for (int j = i; j >= 0; j--)
+        {
+            array[i, array.GetLength(1) / 2 + j - count] = array[i, j];
+            array[i, j] = 0;
+            count++;
+        }
     }
 }
 
 void PrintIsoscelesTriangle(int[,] array)
 {
-    int i = 0;
-    for (int j = 0; j < array.GetLength(1); j++)
+    int maxSymbols = 0;
+    int currentSymbols = 0;
+    string spaceEmpty;
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-        while (j > -1)
+        for (int j = 0; j < array.GetLength(1); j++)
         {
-            Console.Write(array[i,j]);
-            i++;
-            j--;
+            currentSymbols = array[i, j].ToString().Length;
+            if (maxSymbols < currentSymbols) maxSymbols = currentSymbols;
+        }
+    }
+
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            currentSymbols = array[i, j].ToString().Length;
+            spaceEmpty = "  ";
+            for (int k = currentSymbols; k < maxSymbols; k++)
+            {
+                spaceEmpty += " ";
+            }
+            if (array[i, j] == 0) Console.Write(" " + spaceEmpty);
+            else Console.Write(array[i, j] + spaceEmpty);
         }
         Console.WriteLine();
     }
-
 }
-
 
 Console.WriteLine("Please, enter the length of the isosceles triangle side:");
 int N = int.Parse(Console.ReadLine());
-int[,] arrayTrianglePascal = new int[N, N];
+Console.WriteLine();
+Console.WriteLine($"Pascal triangle with {N} rows:");
+int[,] arrayTrianglePascal = new int[N, 2 * N + 1];
 FillTrianglePascal(arrayTrianglePascal);
 PrintIsoscelesTriangle(arrayTrianglePascal);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
